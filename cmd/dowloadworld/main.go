@@ -1,5 +1,0 @@
-package dowloadworld
-
-func main() {
-
-}
