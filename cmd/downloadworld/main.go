@@ -1,30 +1,19 @@
 package main
 
 import (
-	"cloud.google.com/go/storage"
-	"context"
-	"fmt"
-	"google.golang.org/api/iterator"
+	"flag"
 	"log"
+	"world-downloader/pkg/world"
 )
 
 func main() {
-	ctx := context.Background()
-	client, err := storage.NewClient(ctx)
-	if err != nil {
-		panic("could not create cloud storage client")
+	var bucketName string
+	flag.StringVar(&bucketName, "bucket", "fakeBucket", "name of your gcp storage bucket")
+	flag.Parse()
+	downloadErr := world.DownloadWorldFromBucket(bucketName)
+	if downloadErr != nil {
+		log.Println(downloadErr)
+		return
 	}
-	bucket := client.Bucket("tiede-minecraft-world-bucket")
-	query := &storage.Query{Prefix: ""}
-	it := bucket.Objects(ctx, query)
-	for {
-		objectAttributes, err := it.Next()
-		if err == iterator.Done {
-			break
-		}
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(objectAttributes.Name)
-	}
+	log.Println("downloaded world from: " + bucketName)
 }
