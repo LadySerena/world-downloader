@@ -11,6 +11,8 @@ import (
 	"sort"
 )
 
+const filename = "world.tar.gz"
+
 type byTime []storage.ObjectAttrs
 
 func (objects byTime) Len() int {
@@ -62,7 +64,7 @@ func DownloadWorldFromBucket(bucketName string) error {
 		log.Println(bufferErr.Error())
 		return bufferErr
 	}
-	writeErr := ioutil.WriteFile(object.ObjectName(), buffer.Bytes(), os.FileMode(0640))
+	writeErr := ioutil.WriteFile(filename, buffer.Bytes(), os.FileMode(0640))
 	if writeErr != nil {
 		log.Println(writeErr)
 	}
