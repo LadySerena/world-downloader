@@ -191,3 +191,4 @@ gen
 ### extra stuff
 downloadworld
 !cmd/downloadworld
+dist/
