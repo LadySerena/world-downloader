@@ -49,7 +49,7 @@ func DownloadWorldFromBucket(bucketName string) error {
 	}
 	sort.Sort(sort.Reverse(objectsByTime))
 	object := bucket.Object(objectsByTime[0].Name)
-	reader, readerErr := object.NewReader(context.Background())
+	reader, readerErr := object.NewReader(ctx)
 	if readerErr != nil {
 		log.Println(readerErr.Error())
 		return readerErr
