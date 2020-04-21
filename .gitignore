@@ -187,3 +187,7 @@ Temporary Items
 *.iml
 out
 gen
+
+### extra stuff
+downloadworld
+!cmd/downloadworld
