@@ -12,6 +12,7 @@ import (
 )
 
 const filename = "world.tar.gz"
+const permission = 0644
 
 type byTime []storage.ObjectAttrs
 
@@ -64,7 +65,7 @@ func DownloadWorldFromBucket(bucketName string) error {
 		log.Println(bufferErr.Error())
 		return bufferErr
 	}
-	writeErr := ioutil.WriteFile(filename, buffer.Bytes(), os.FileMode(0640))
+	writeErr := ioutil.WriteFile(filename, buffer.Bytes(), os.FileMode(permission))
 	if writeErr != nil {
 		log.Println(writeErr)
 	}

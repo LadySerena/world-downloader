@@ -189,6 +189,7 @@ out
 gen
 
 ### extra stuff
-downloadworld
-!cmd/downloadworld
+world-downloader
+world.tar.gz
+!cmd/world-downloader
 dist/

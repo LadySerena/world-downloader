@@ -8,8 +8,12 @@ import (
 
 func main() {
 	var bucketName string
-	flag.StringVar(&bucketName, "bucket", "fakeBucket", "name of your gcp storage bucket")
+	flag.StringVar(&bucketName, "bucket", "", "name of your gcp storage bucket")
 	flag.Parse()
+	if bucketName == "" {
+		flag.Usage()
+		return
+	}
 	downloadErr := world.DownloadWorldFromBucket(bucketName)
 	if downloadErr != nil {
 		log.Println(downloadErr)
